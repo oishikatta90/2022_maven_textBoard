@@ -1,9 +1,16 @@
 package com.lhw.project1.user.controller;
 
 import com.lhw.project1.user.util.Util;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import net.bytebuddy.asm.Advice;
+import net.bytebuddy.implementation.bind.annotation.AllArguments;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/usr")
@@ -12,81 +19,37 @@ public class UserController {
 
     @RequestMapping("/article/doWrite")
     @ResponseBody
-    public Article doWrite(String title, String body) {
+    public ResultData doWrite(String title, String body) {
         int id = lastArticleId += 1;
         String regDate = Util.getNowDateStr();
         String updateDate = Util.getNowDateStr();
 
         Article article = new Article(id, regDate, updateDate, title, body);
 
+//
+//        Map<String, Object> rsData = new HashMap<>();
+//        rsData.put("resultCode", "S-1");
+//        rsData.put("message", id + "번 글이 작성되었습니다.");
+//        rsData.put("article", article);
 
-        return article;
+        return new ResultData("S-1", id + "번글이 작성되었습니다.", article   );
     }
 }
 
+@Data
+@AllArgsConstructor
+class ResultData {
+    private String resultData;
+    private String msg;
+    private Article article;
+    }
+
+@Data
+@AllArgsConstructor
 class Article {
     private int id;
     private String regDate;
     private String updateDate;
     private String title;
     private String body;
-
-    public Article(int id, String regDate, String updateDate, String title, String body) {
-        this.id = id;
-        this.regDate = regDate;
-        this.updateDate = updateDate;
-        this.title = title;
-        this.body = body;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getRegDate() {
-        return regDate;
-    }
-
-    public void setRegDate(String regDate) {
-        this.regDate = regDate;
-    }
-
-    public String getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(String updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    @Override
-    public String toString() {
-        return "Article{" +
-                "id=" + id +
-                ", regDate='" + regDate + '\'' +
-                ", updateDate='" + updateDate + '\'' +
-                ", title='" + title + '\'' +
-                ", body='" + body + '\'' +
-                '}';
-    }
 }
