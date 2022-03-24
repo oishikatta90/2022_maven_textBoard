@@ -25,6 +25,12 @@ public class UserController {
     @RequestMapping("/article/doWrite")
     @ResponseBody
     public ResultData doWrite(String title, String body) {
+        if (Util.isEmpty(title)) {
+            return new ResultData("F-1", "제목을 입력해주세요.");
+        }
+        if (Util.isEmpty(body)) {
+            return new ResultData("F-2", "내용을 입력해주세요.");
+        }
         int id = writeArticle(title, body);
         Article article = getArticleById(id);
         return new ResultData("S-1", article.getId() + "번글이 작성되었습니다.", "article", article, "articleTitle", article.getTitle(), "regDate", article.getRegDate());
@@ -32,14 +38,26 @@ public class UserController {
 
     @RequestMapping("/article/doModify")
     @ResponseBody
-    public ResultData doModify(int id, String title, String body) {
+    public ResultData doModify(Integer id, String title, String body) {
+        if (Util.isEmpty(id)) {
+            return new ResultData("F-0", "바꾸실 글 번호를 입력해주세요.");
+        }
+        if (Util.isEmpty(title)) {
+            return new ResultData("F-1", "제목을 입력해주세요.");
+        }
+        if (Util.isEmpty(body)) {
+            return new ResultData("F-2", "내용을 입력해주세요.");
+        }
         modifyArticle(id, title, body);
-        return new ResultData("S-1", id + "번 글이 변경되었습니다.", getArticleById(id));
+        return new ResultData("S-1", id + "번 글이 변경되었습니다.", "내용",getArticleById(id));
     }
 
     @RequestMapping("/article/getArticle")
     @ResponseBody
-    public ResultData getArticle(int id) {
+    public ResultData getArticle(Integer id) {
+        if (Util.isEmpty(id)) {
+            return new ResultData("F-0", "글 번호를 입력해주세요.");
+        }
         Article article = getArticleById(id);
         if (article == null) {
             return new ResultData("F-1", "존재하지 않는 게시물입니다!");
@@ -49,7 +67,10 @@ public class UserController {
 
     @RequestMapping("/article/doDelete")
     @ResponseBody
-    public ResultData doDelete(int id) {
+    public ResultData doDelete(Integer id) {
+        if (Util.isEmpty(id)) {
+            return new ResultData("F-0", "지우실 번호를 입력해주세요.");
+        }
         boolean deleted = deleteArticleById(id);
 
         if (deleted == false) {

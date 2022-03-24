@@ -139,11 +139,7 @@ public class Util {
             String strData = (String) data;
 
             return strData.trim().length() == 0;
-        } else if (data instanceof Integer) {
-            Integer integerData = (Integer) data;
-
-            return integerData != 0;
-        } else if (data instanceof List) {
+        }  else if (data instanceof List) {
             List listData = (List) data;
 
             return listData.isEmpty();
@@ -153,7 +149,7 @@ public class Util {
             return mapData.isEmpty();
         }
 
-        return true;
+        return false;
     }
 
     public static <T> T ifEmpty(T data, T defaultValue) {
