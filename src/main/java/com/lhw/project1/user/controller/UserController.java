@@ -30,6 +30,13 @@ public class UserController {
         return new ResultData("S-1", article.getId() + "번글이 작성되었습니다.", "article", article, "articleTitle", article.getTitle(), "regDate", article.getRegDate());
     }
 
+    @RequestMapping("/article/doModify")
+    @ResponseBody
+    public ResultData doModify(int id, String title, String body) {
+        modifyArticle(id, title, body);
+        return new ResultData("S-1", id + "번 글이 변경되었습니다.", getArticleById(id));
+    }
+
     @RequestMapping("/article/getArticle")
     @ResponseBody
     public ResultData getArticle(int id) {
@@ -53,7 +60,19 @@ public class UserController {
 
 
     }
+
     //내부
+    private boolean modifyArticle(int id, String title, String body) {
+        Article article = getArticleById(id);
+        if (article == null) {
+            return false;
+        }
+        article.setTitle(title);
+        article.setBody(body);
+        article.setUpdateDate(Util.getNowDateStr());
+        return true;
+    }
+
     private void makeTestData() {
         for (int i = 0; i < 10; i++) {
             writeArticle("제목1", "내용1");
@@ -62,17 +81,17 @@ public class UserController {
 
 
     private boolean deleteArticleById(int id) {
-        for(Article article : articles) {
-            if (article.getId() == id) {
-                articles.remove(article);
-                return true;
-            }
+        Article article = getArticleById(id);
+
+        if (article == null) {
+            return false;
         }
-        return false;
+        articles.remove(article);
+        return true;
     }
 
     private Article getArticleById(int id) {
-        for (Article article : articles){
+        for (Article article : articles) {
             if (article.getId() == id) {
                 return article;
             }
