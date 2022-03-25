@@ -4,25 +4,18 @@ import com.lhw.project1.user.dto.Article;
 import com.lhw.project1.user.dto.ResultData;
 import com.lhw.project1.user.service.ArticleService;
 import com.lhw.project1.user.util.Util;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 @RequestMapping("/usr")
 public class UserController {
-    @Autowired
-    private ArticleService articleService;
+    private final ArticleService articleService;
 
-    public UserController() {
-
+    public UserController(ArticleService articleService) {
+        this.articleService = articleService;
 //        this.articleService = new ArticleService();
-
-
     }
 
     @RequestMapping("/article/doWrite")

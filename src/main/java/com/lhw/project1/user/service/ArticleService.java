@@ -3,33 +3,26 @@ package com.lhw.project1.user.service;
 import com.lhw.project1.user.dao.ArticleDao;
 import com.lhw.project1.user.dto.Article;
 import com.lhw.project1.user.dto.ResultData;
-import com.lhw.project1.user.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.xml.transform.Result;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 public class ArticleService {
-    @Autowired
-    private ArticleDao articleDao;
+    private final ArticleDao articleDao;
 
-
-    public ArticleService() {
-
+    public ArticleService(ArticleDao articleDao) {
+        this.articleDao = articleDao;
     }
 
-
     public Article getArticleById(int id) {
-        Article article;
-        return article = articleDao.getArticleById(id);
+        return articleDao.getArticleById(id);
     }
 
     public ResultData writeArticle(String title, String body) {
-        int id = articleDao.writeArticle(title, body);
+        int boardId = 3; // 가짜 데이터
+        int memberId = 3; // 가짜 데이터
+        articleDao.writeArticle(boardId, memberId, title, body);
+        int id = 1; // 가짜 데이터
 
         return new ResultData("S-1", id + "번 글이 작성되었습니다.");
     }
@@ -40,9 +33,13 @@ public class ArticleService {
         if (article == null) {
             return new ResultData("F-4", "존재하지 않는 게시물 번호입니다.");
         }
-        articleDao.modifyArticle(id, title, body);
+        boolean sign = articleDao.modifyArticle(id, title, body);
+        if (sign) {
 
-        return new ResultData("S-1", "게시물이 수정되었습니다.","id", id);
+            return new ResultData("S-1", "게시물이 수정되었습니다.", "id", id);
+        } else {
+            return new ResultData("F-1", "수정에 실패하셨습니다.");
+        }
     }
 
     public ResultData deleteArticleById(Integer id) {
@@ -52,7 +49,7 @@ public class ArticleService {
             return new ResultData("F-4", "존재하지 않는 게시물 번호입니다.");
         }
         articleDao.deleteArticleById(id);
-        
-        return new ResultData("S-1", id + "번 게시물이 삭제되었습니다.","id", id);
+
+        return new ResultData("S-1", id + "번 게시물이 삭제되었습니다.", "id", id);
     }
 }
