@@ -76,8 +76,22 @@
 			<version>2.2.2</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
 
-<!--		&lt;!&ndash; https://mvnrepository.com/artifact/org.mybatis/mybatis &ndash;&gt;-->
+		<!-- jsp 엔진 -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+
+
+		<!--		&lt;!&ndash; https://mvnrepository.com/artifact/org.mybatis/mybatis &ndash;&gt;-->
 <!--		<dependency>-->
 <!--			<groupId>org.mybatis</groupId>-->
 <!--			<artifactId>mybatis</artifactId>-->

@@ -3,6 +3,10 @@ server:
 mybatis:
   type-aliases-package: com.lhw.project1.user.dto
 spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/project1?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
