@@ -8,8 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 @Controller
-@RequestMapping("/usr")
+@RequestMapping("/project1/article")
 public class UserController {
     private final ArticleService articleService;
 
@@ -18,7 +19,7 @@ public class UserController {
 //        this.articleService = new ArticleService();
     }
 
-    @RequestMapping("/article/doWrite")
+    @RequestMapping("/doWrite")
     @ResponseBody
     public ResultData doWrite(String title, String body) {
         if (Util.isEmpty(title)) {
@@ -30,7 +31,7 @@ public class UserController {
         return articleService.writeArticle(title, body);
     }
 
-    @RequestMapping("/article/doModify")
+    @RequestMapping("/doModify")
     @ResponseBody
     public ResultData doModify(Integer id, String title, String body) {
         if (Util.isEmpty(id)) {
@@ -50,7 +51,7 @@ public class UserController {
         return articleService.modifyArticle(id, title, body);
     }
 
-    @RequestMapping("/article/doDelete")
+    @RequestMapping("/doDelete")
     @ResponseBody
     public ResultData doDelete(Integer id) {
         if (Util.isEmpty(id)) {
@@ -63,7 +64,7 @@ public class UserController {
         return articleService.deleteArticleById(id);
     }
 
-    @RequestMapping("/article/getArticle")
+    @RequestMapping("/getArticle")
     @ResponseBody
     public ResultData getArticle(Integer id) {
         if (Util.isEmpty(id)) {
@@ -75,6 +76,7 @@ public class UserController {
         }
         return new ResultData("S-1", article.getId() + "번 글을 찾았습니다.", "article", article);
     }
+
 
 }
 

@@ -15,4 +15,5 @@ public interface ArticleDao {
     int getLastInsertId();
 
     Article getArticleById(@Param("id") int id);
-    }
+
+}
