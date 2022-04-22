@@ -64,9 +64,8 @@ public class ArticleController {
         return articleService.deleteArticleById(id);
     }
 
-    @RequestMapping("/project1/article/showList")
+    @RequestMapping("/project1/article/list")
     public String showList() {
-
         return "project1/article/list";
     }
 

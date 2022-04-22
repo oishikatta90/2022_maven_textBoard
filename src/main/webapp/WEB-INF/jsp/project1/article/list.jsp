@@ -90,13 +90,9 @@
 				</nav>
 			</div>
 		</header>
-			<div class="title-bar">
-        		<div class="container mx-auto">
-        		    <span><i class="fas fa-home"></i></span>
-        		    <span>HOME</span>
-
-        		</div>
-            </div>
+		<h1>
+		    게시물 리스트
+		</h1>
 	</div>
 </body>
 </html>
