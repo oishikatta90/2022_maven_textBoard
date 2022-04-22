@@ -61,7 +61,7 @@
 								</h1>
 								<ul>
 									<li>
-										<a href="#">
+										<a href="../article/list?boardId=1">
 											<span>
 												<i class="far fa-clipboard"></i>
 											</span>
@@ -69,7 +69,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="#">
+										<a href="../article/list?boardId=2">
 											<span>
 												<i class="far fa-clipboard"></i>
 											</span>

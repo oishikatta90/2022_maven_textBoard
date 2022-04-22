@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-@RequestMapping("/project1/article")
-public class UserController {
+@RequestMapping("")
+public class ArticleController {
     private final ArticleService articleService;
 
-    public UserController(ArticleService articleService) {
+    public ArticleController(ArticleService articleService) {
         this.articleService = articleService;
 //        this.articleService = new ArticleService();
     }
 
-    @RequestMapping("/doWrite")
+    @RequestMapping("/project1/article/doWrite")
     @ResponseBody
     public ResultData doWrite(String title, String body) {
         if (Util.isEmpty(title)) {
@@ -31,7 +31,7 @@ public class UserController {
         return articleService.writeArticle(title, body);
     }
 
-    @RequestMapping("/doModify")
+    @RequestMapping("/project1/article/doModify")
     @ResponseBody
     public ResultData doModify(Integer id, String title, String body) {
         if (Util.isEmpty(id)) {
@@ -51,7 +51,7 @@ public class UserController {
         return articleService.modifyArticle(id, title, body);
     }
 
-    @RequestMapping("/doDelete")
+    @RequestMapping("/project1/article/doDelete")
     @ResponseBody
     public ResultData doDelete(Integer id) {
         if (Util.isEmpty(id)) {
@@ -64,7 +64,13 @@ public class UserController {
         return articleService.deleteArticleById(id);
     }
 
-    @RequestMapping("/getArticle")
+    @RequestMapping("/project1/article/showList")
+    public String showList() {
+
+        return "project1/article/list";
+    }
+
+    @RequestMapping("/project1/article/getArticle")
     @ResponseBody
     public ResultData getArticle(Integer id) {
         if (Util.isEmpty(id)) {
